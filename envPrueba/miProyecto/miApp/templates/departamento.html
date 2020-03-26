@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<table>
+    <tr>
+        <td>ID</td>
+        <td>{{ departamento.id }}</td>
+    </tr>
+    <tr>
+        <td>Nombre</td>
+        <td>{{ departamento.nombre }}</td>
+    </tr>
+    <tr>
+        <td>Telefono</td>
+        <td>{{ departamento.telefono }}</td>
+    </tr>
+</table>
+
+{% endblock %}
