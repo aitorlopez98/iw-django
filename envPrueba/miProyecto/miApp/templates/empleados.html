@@ -3,9 +3,9 @@
 {% block contenido %}
 
 <ul>
-    {% for dep in lista_departamentos %}
+    {% for emp in lista_empleados %}
     <li>
-        {{ dep.id }}: {{ dep.nombre }} --><a href="">Ver</a>
+        {{ emp.id }}: {{ emp.nombre }}
     </li>
     {% endfor %}
 </ul>
