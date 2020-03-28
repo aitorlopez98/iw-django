@@ -2,12 +2,11 @@ body{
     background-color: #fad390;
 }
 h1{
-    color: aqua;
+    color: blue;
     text-align: center;
 }
 h2{
     color: red;
-    text-align: center;
 }
 #hola{
     color: green;

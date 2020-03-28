@@ -3,7 +3,7 @@
 {% block contenido %}
 <h3>Nombres</h3>
 <ul>
-    {% for dep in lista_departamentos %}
+    {% for dep in departamento_list %}
     <li>
         {{ dep.id }}: {{ dep.nombre }} --><a href="{% url 'dep_detail' dep.id %}">Ver</a>
     </li>
