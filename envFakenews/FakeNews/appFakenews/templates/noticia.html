@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<ul>
+    <li>
+        Noticia Falsa {{ noticia.id }}
+        <ul>
+            <li>
+                <p>{{ noticia.titular }}</p>
+            </li>
+            <li>
+                <P>{{ noticia.f_publi }}</p>
+            </li>
+            <li>
+                <p>{{ noticia.categoria }}</p>
+            </li>
+            <li>
+                <p><a href="{{ noticia.enlace }}">{{ noticia.enlace }}</a></p>
+            </li>
+            <li>
+                <p>{{ noticia.desc }}</p>
+            </li>             
+        </ul>
+    </li>
+</ul>
+<a href="{% url 'noticias' %}">Noticias</a>
+{% endblock %}

@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 from .models import Departamento, Empleado, Especializacion
+from django.http import HttpResponse
+
 
 # Create your views here.
-
-from django.http import HttpResponse
 
 def index(request):
     context = {'mensaje': 'BIENVENIDO A LA APP'}
@@ -22,7 +22,7 @@ class DepartamentosListView(ListView):
     queryset = Departamento.objects.order_by('id')
 
     def get_context_data(self, **kwargs):
-        context = super(DepartamenrosListView, self).get_context_data(**kwargs)
+        context = super(DepartamentosListView, self).get_context_data(**kwargs)
         context['titulo_pagina'] = 'Departamentos existentes'
         return context
 
@@ -72,3 +72,12 @@ class EmpleadoDetailView(DetailView):
         context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
         context['titulo_pagina'] = 'Detalles por empleado'
         return context
+
+
+def show_form(request):
+    return render(request, 'registro.html')
+
+def post_form(request):
+    usuario = request.POST["usuario"]
+    email = request.POST["email"]
+    return HttpResponse(f"El usuario es {usuario} y el email es {email}")

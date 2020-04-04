@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<h3>Noticias</h3>
+<ul>
+    {% for not in noticia_list %}
+    <li>
+        Noticia Falsa {{ not.id }}
+        <ul>
+            <li>
+                <a href="{% url 'noticia_det' not.id %}">{{ not.titular }}</a>
+            </li>
+            <li>
+                {{ not.f_publi }}
+            </li>
+            <li>
+                {{ not.categoria }}
+            </li>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
