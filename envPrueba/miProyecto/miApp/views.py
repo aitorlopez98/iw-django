@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView
+from django.views import View
 from .models import Departamento, Empleado, Especializacion
 from django.http import HttpResponse
+from .forms import EmpleadoForm
 
 
 # Create your views here.
@@ -78,6 +80,40 @@ def show_form(request):
     return render(request, 'registro.html')
 
 def post_form(request):
-    usuario = request.POST["usuario"]
+    nombre = request.POST["nombre"]
+    apellidos = request.POST["apellidos"]
+    edad = request.POST["edad"]
     email = request.POST["email"]
-    return HttpResponse(f"El usuario es {usuario} y el email es {email}")
+    direccion = request.POST["direccion"]
+    return HttpResponse(f"{nombre} --- {apellidos} --- {edad} --- {email} --- {direccion}")
+
+def show_empleado_form(request):
+    form = EmpleadoForm()
+    return render(request, 'empleado_form.html', {'form': form})
+
+def post_empleado_form(request):
+    form = EmpleadoForm(request.POST)
+    if form.is_valid():
+        nombre = form.cleaned_data['nombre']
+        apellidos = form.cleaned_data['apellidos']
+        edad = form.cleaned_data['edad']
+        email = form.cleaned_data['email']
+        direccion = form.cleaned_data['direccion']
+        return HttpResponse(f"El nombre es: {nombre} {apellidos}, {edad}, {email}, {direccion}")
+
+class CreateEmpleadoView(View):
+    def get(self, request, *args, **kwargs):
+        form = EmpleadoForm()
+        context = {
+            'form': form,
+            'titulo_pagina': 'Crear empleado'
+                   }
+        return render(request, 'empleado_form.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = EmpleadoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('empleados')
+
+        return render(request, 'empleado_form.html', {'form': form})

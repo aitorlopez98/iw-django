@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Registro</title>
+</head>
+<body>
+    <form action="{% url 'empleado_form' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Nuevo Empleado">
+    </form>
+</body>
+</html>
+
+{% endblock %}

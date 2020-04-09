@@ -8,5 +8,7 @@ urlpatterns = [
     path('empleado/<int:pk>/', views.EmpleadoDetailView.as_view(), name='emp_detail'),
     path('empleados/', views.EmpleadosListView.as_view(), name='empleados'),
     path('registro/', views.show_form, name='registro'),
-    path('registrar/', views.post_form, name='registrar')
+    path('registrar/', views.post_form, name='registrar'),
+    path('cempleado/', views.CreateEmpleadoView.as_view(), name='empleado_form'),
+    path('pos_empleado/', views.post_empleado_form, name='pos_empleado_form'),
 ]

@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Categoria, Noticia
 from django.views. generic import ListView, DetailView
+from django.views import View
+from .forms import NoticiaForm, CategoriaForm
 
 # Create your views here.
 def index(request):
@@ -36,3 +38,20 @@ class CategoriasListView(ListView):
         context = super(CategoriasListView, self).get_context_data(**kwargs)
         context['titulo_pagina'] = 'Categorias existentes'
         return context
+
+class CreateNoticiaView(View):
+    def get(self, request, *args, **kwargs):
+        form = NoticiaForm()
+        context = {
+            'form': form,
+            'titulo_pagina': 'Crear Noticia'
+        }
+        return render(request, 'create_noticia_form.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = NoticiaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('noticias')
+
+        return render(request, 'create_noticia_form.html', {'form': form})
